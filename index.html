@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<script src="util.js"></script>
+		<script src="verlet.js"></script>
+		<script src="blob.js"></script>
+		
+		<style>
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				var o = {
+					'Verlet': Verlet,
+					'Blob': Blob
+				}
+				
+				var active = 'Verlet';
+				o[active].init('canvas');
+				
+				$('#control select').on('change', function() {
+					$.each(o, function(key, value) {
+						window.clearInterval(value.interval);
+						value.clear();
+					});
+					
+					active = $(this).val();
+					o[active].init('canvas');
+				});
+				
+				$('button').on('click', function(event) {
+					o[active].clear();
+					
+					event.preventDefault();
+					return false;
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div id="content">
+			<h1>Verlet demonstration</h1>
+			
+			<div id="control">
+				<select>
+					<option value="Verlet" selected="selected">Verlet</option>
+					<option value="Blob">Blob</option>
+				</select>
+				
+				<button value="clear">Clear</button>
+			</div>
+			
+			<canvas id="canvas" width="640px" height="480px">PLEASE CONSIDER UPDATING YOUR BROWSER</canvas>
+		</div>
+	</body>
+</html>
