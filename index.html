@@ -5,6 +5,7 @@
 		<script src="util.js"></script>
 		<script src="verlet.js"></script>
 		<script src="blob.js"></script>
+		<script src="ragdoll.js"></script>
 		
 		<style>
 		</style>
@@ -13,11 +14,16 @@
 			$(document).ready(function() {
 				var o = {
 					'Verlet': Verlet,
-					'Blob': Blob
+					'Blob': Blob,
+					'Ragdoll': RagdollApp
 				}
 				
 				var active = 'Verlet';
 				o[active].init('canvas');
+				
+				$.each(o, function(key, value) {
+					$('#control select').append('<option value="' + key + '"' + (key == 'Verlet' ? 'selected: "selected"' : '') +'>' + key + '</option>');
+				});
 				
 				$('#control select').on('change', function() {
 					$.each(o, function(key, value) {
@@ -45,8 +51,8 @@
 			
 			<div id="control">
 				<select>
-					<option value="Verlet" selected="selected">Verlet</option>
-					<option value="Blob">Blob</option>
+					<!--<option value="Verlet" selected="selected">Verlet</option>
+					<option value="Blob">Blob</option>-->
 				</select>
 				
 				<button value="clear">Clear</button>

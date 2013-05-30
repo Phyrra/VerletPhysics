@@ -130,7 +130,7 @@ var Blob = {
 	
 	init: function(canvasId){
 		if (this.canvas) {
-			this.canvas.off('click');
+			this.canvas.off();
 		}
 		
 		this.canvas = $('#' + canvasId);
