@@ -115,17 +115,10 @@ var Blob = {
 	axObject: null,
 	
 	getMousePos: function(event){
-		if(event.pageX || event.pageY){
-			this.mouseX = event.pageX;
-			this.mouseY = event.pageY;
-		}
-		
-		this.mouseX = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-		this.mouseY = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-		
-		var off = this.canvas.offset();
-		this.mouseX -= off.left;
-		this.mouseY -= off.top;
+		var rect = this.canvas[0].getBoundingClientRect();
+
+		this.mouseX = event.clientX - rect.left;
+		this.mouseY = event.clientY - rect.top;
 	},
 	
 	init: function(canvasId){
